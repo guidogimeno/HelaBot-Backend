@@ -1,12 +1,30 @@
 package com.gimeno.jarvis.models;
 
+import javax.persistence.*;
+
+@Entity
 public class GroceryItem {
 
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private GroceryProduct product;
+
+    @Column(name = "quantity")
     private int quantity = 1;
+
+    public GroceryItem() {
+    }
 
     public GroceryItem(GroceryProduct product) {
         this.product = product;
+    }
+
+    public GroceryItem(GroceryProduct product, int quantity) {
+        this(product);
+        this.quantity = quantity;
     }
 
     public GroceryProduct getProduct() {

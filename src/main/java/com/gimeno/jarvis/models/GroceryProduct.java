@@ -32,24 +32,12 @@ public class GroceryProduct {
         return this.barCode;
     }
 
-    public void setBarCode(int barCode) {
-        this.barCode = barCode;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public GroceryCategory getCategory() {
         return category;
-    }
-
-    public void setCategory(GroceryCategory category) {
-        this.category = category;
     }
 
     public boolean hasSameBarCode(GroceryProduct product) {

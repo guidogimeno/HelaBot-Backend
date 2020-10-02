@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class FridgeTests {
 
-    private Fridge frigde;
+    private Fridge fridge;
 
     private GroceryProduct milk = new GroceryProduct(1234, "Milk", GroceryCategory.DAIRY);
     private GroceryProduct bread = new GroceryProduct(4321, "Bread", GroceryCategory.BREAD);
@@ -18,58 +18,58 @@ public class FridgeTests {
 
     @Before
     public void createFridge() {
-        frigde = new Fridge();
+        fridge = new Fridge();
     }
 
     @Test
-    public void addItemInTheFridge() {
-        addItemsToTheFridge();
+    public void addItemToFridge() {
+        addItemsToFridge();
 
-        assertTrue(frigde.findItem(milk).isPresent());
+        assertTrue(fridge.findItem(milk).isPresent());
     }
 
     @Test
-    public void removeItemOfTheFridge() {
-        addItemsToTheFridge();
+    public void removeItemFromFridge() {
+        addItemsToFridge();
 
-        frigde.removeGroceryProduct(milk);
-        frigde.removeGroceryProduct(milk);
-        frigde.removeGroceryProduct(milk);
+        fridge.removeGroceryProduct(milk);
+        fridge.removeGroceryProduct(milk);
+        fridge.removeGroceryProduct(milk);
 
-        GroceryItem milkItem = frigde.findItem(milk).orElseThrow(GroceryItemNotFoundException::new);
+        GroceryItem milkItem = fridge.findItem(milk).orElseThrow(GroceryItemNotFoundException::new);
 
         assertEquals(1, milkItem.getQuantity());
     }
 
     @Test(expected = GroceryItemNotFoundException.class)
     public void itemNotFound() {
-        addItemsToTheFridge();
+        addItemsToFridge();
 
-        frigde.removeGroceryProduct(water);
+        fridge.removeGroceryProduct(water);
     }
 
     @Test
     public void removeLastUnit() {
-        addItemsToTheFridge();
+        addItemsToFridge();
 
-        frigde.removeGroceryProduct(ketchup);
+        fridge.removeGroceryProduct(ketchup);
 
-        assertFalse(frigde.findItem(ketchup).isPresent());
+        assertFalse(fridge.findItem(ketchup).isPresent());
     }
 
-    private void addItemsToTheFridge() {
+    private void addItemsToFridge() {
         // Milks
         for(int i = 1; i <= 4; i++) {
-            frigde.addGroceryProduct(milk);
+            fridge.addGroceryProduct(milk);
         }
 
         //Bread
         for(int i = 1; i <= 15; i++) {
-            frigde.addGroceryProduct(bread);
+            fridge.addGroceryProduct(bread);
         }
 
         //Ketchup
-        frigde.addGroceryProduct(ketchup);
+        fridge.addGroceryProduct(ketchup);
     }
 
 }
