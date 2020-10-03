@@ -15,12 +15,12 @@ public class FridgeController {
 
     @GetMapping("/fridge/{id}")
     public Fridge getFridge(@PathVariable(value = "id") Long id) {
-        return fridgeDao.get(id).orElseThrow(FridgeNotFoundException::new);
+        return fetchFridge(id);
     }
 
     @PostMapping("/fridge/{id}/grocery_product")
     public Fridge addProductToFridge(@PathVariable(value = "id") Long id, @RequestBody GroceryProduct newProduct) {
-        Fridge fridge = fridgeDao.get(id).orElseThrow(FridgeNotFoundException::new);
+        Fridge fridge = fetchFridge(id);
         fridge.addGroceryProduct(newProduct);
         fridgeDao.update(fridge);
         return fridge;
@@ -28,10 +28,14 @@ public class FridgeController {
 
     @DeleteMapping("/fridge/{id}/grocery_product")
     public Fridge removeProductFromFridge(@PathVariable(value = "id") Long id, @RequestBody GroceryProduct product) {
-        Fridge fridge = fridgeDao.get(id).orElseThrow(FridgeNotFoundException::new);
+        Fridge fridge = fetchFridge(id);
         fridge.removeGroceryProduct(product);
         fridgeDao.update(fridge);
         return fridge;
+    }
+
+    private Fridge fetchFridge(Long id) {
+        return fridgeDao.get(id).orElseThrow(FridgeNotFoundException::new);
     }
 
 }
