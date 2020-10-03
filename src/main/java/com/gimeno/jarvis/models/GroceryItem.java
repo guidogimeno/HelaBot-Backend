@@ -9,7 +9,7 @@ public class GroceryItem {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private GroceryProduct product;
 
     @Column(name = "quantity")

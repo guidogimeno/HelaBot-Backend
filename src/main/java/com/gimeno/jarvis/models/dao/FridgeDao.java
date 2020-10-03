@@ -1,6 +1,7 @@
 package com.gimeno.jarvis.models.dao;
 
 import com.gimeno.jarvis.models.Fridge;
+import com.gimeno.jarvis.models.GroceryProduct;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -38,4 +39,5 @@ public class FridgeDao implements Dao<Fridge> {
     public void update(Fridge fridge) {
         entityManager.merge(fridge);
     }
+
 }

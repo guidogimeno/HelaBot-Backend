@@ -14,7 +14,7 @@ public class Fridge {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GroceryItem> groceryItems = new ArrayList<>();
 
     public List<GroceryItem> getGroceryItems() {
