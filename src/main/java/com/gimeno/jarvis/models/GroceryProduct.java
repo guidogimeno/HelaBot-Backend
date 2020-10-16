@@ -6,12 +6,13 @@ import javax.persistence.*;
 @Table(name = "grocery_products")
 public class GroceryProduct {
 
-    @Id
+    /*@Id
     @GeneratedValue
-    private Long id;
+    private Long id;*/
 
+    @Id
     @Column(name = "barcode", unique = true)
-    private int barCode;
+    private long barCode;
 
     @Column(name = "name")
     private String name;
@@ -22,13 +23,13 @@ public class GroceryProduct {
     public GroceryProduct() {
     }
 
-    public GroceryProduct(int barCode, String name, GroceryCategory category) {
+    public GroceryProduct(long barCode, String name, GroceryCategory category) {
         this.barCode = barCode;
         this.name = name;
         this.category = category;
     }
 
-    public int getBarCode() {
+    public long getBarCode() {
         return this.barCode;
     }
 
@@ -44,7 +45,7 @@ public class GroceryProduct {
         return hasBarCode(product.getBarCode());
     }
 
-    public boolean hasBarCode(int barCode) {
+    public boolean hasBarCode(long barCode) {
         return getBarCode() == barCode;
     }
 

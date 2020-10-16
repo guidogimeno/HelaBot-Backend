@@ -31,7 +31,6 @@ public class Fridge {
         }
     }
 
-    //TODO No se esta quitando de la tabla de la Base.. Debe tener que ver con el CASCADE
     public void removeGroceryProduct(GroceryProduct product) {
         GroceryItem item = findItem(product).orElseThrow(GroceryItemNotFoundException::new);
 

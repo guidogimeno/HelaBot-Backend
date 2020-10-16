@@ -1,43 +1,47 @@
 package com.gimeno.jarvis.models.dao;
 
 import com.gimeno.jarvis.models.Fridge;
-import com.gimeno.jarvis.models.GroceryProduct;
+import com.gimeno.jarvis.models.exceptions.FridgeNotFoundException;
 import org.springframework.stereotype.Repository;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
-@Repository
-public class FridgeDao implements Dao<Fridge> {
+/*@Repository
+public class FridgeDao implements IFridgeDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
+
+
     @Override
-    public Optional<Fridge> get(long id) {
-        return Optional.ofNullable(entityManager.find(Fridge.class, id));
+    public Fridge get(long id) {
+        Fridge fridge = entityManager.find(Fridge.class, id);
+        if (fridge == null) throw new FridgeNotFoundException();
+        return fridge;
     }
 
     @Override
-    @Transactional
     @SuppressWarnings("unchecked")
     public List<Fridge> getAll() {
         return entityManager.createQuery("from Fridge").getResultList();
     }
 
     @Override
-    @Transactional
     public void save(Fridge fridge) {
         entityManager.persist(fridge);
     }
 
     @Override
-    @Transactional
     public void update(Fridge fridge) {
         entityManager.merge(fridge);
     }
 
-}
+    @Override
+    public void delete(long id) {
+        throw new NotImplementedException();
+    }
+}*/

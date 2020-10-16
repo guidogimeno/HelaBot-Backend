@@ -2,16 +2,16 @@ package com.gimeno.jarvis.controllers;
 
 import com.gimeno.jarvis.models.Fridge;
 import com.gimeno.jarvis.models.GroceryProduct;
-import com.gimeno.jarvis.models.dao.Dao;
-import com.gimeno.jarvis.models.exceptions.FridgeNotFoundException;
+import com.gimeno.jarvis.models.service.IFridgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 public class FridgeController {
 
     @Autowired
-    private Dao<Fridge> fridgeDao;
+    private IFridgeService fridgeService;
 
     @GetMapping("/fridge/{id}")
     public Fridge getFridge(@PathVariable(value = "id") Long id) {
@@ -22,7 +22,7 @@ public class FridgeController {
     public Fridge addProductToFridge(@PathVariable(value = "id") Long id, @RequestBody GroceryProduct newProduct) {
         Fridge fridge = fetchFridge(id);
         fridge.addGroceryProduct(newProduct);
-        fridgeDao.update(fridge);
+        fridgeService.save(fridge);
         return fridge;
     }
 
@@ -30,12 +30,12 @@ public class FridgeController {
     public Fridge removeProductFromFridge(@PathVariable(value = "id") Long id, @RequestBody GroceryProduct product) {
         Fridge fridge = fetchFridge(id);
         fridge.removeGroceryProduct(product);
-        fridgeDao.update(fridge);
+        fridgeService.save(fridge);
         return fridge;
     }
 
     private Fridge fetchFridge(Long id) {
-        return fridgeDao.get(id).orElseThrow(FridgeNotFoundException::new);
+        return fridgeService.get(id);
     }
 
 }
