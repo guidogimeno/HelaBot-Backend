@@ -15,12 +15,12 @@ public class FridgeController {
 
     @GetMapping("/fridge/{id}")
     public Fridge getFridge(@PathVariable(value = "id") Long id) {
-        return fetchFridge(id);
+        return fridgeService.get(id);
     }
 
     @PostMapping("/fridge/{id}/grocery_product")
     public Fridge addProductToFridge(@PathVariable(value = "id") Long id, @RequestBody GroceryProduct newProduct) {
-        Fridge fridge = fetchFridge(id);
+        Fridge fridge = fridgeService.get(id);
         fridge.addGroceryProduct(newProduct);
         fridgeService.save(fridge);
         return fridge;
@@ -28,14 +28,10 @@ public class FridgeController {
 
     @DeleteMapping("/fridge/{id}/grocery_product")
     public Fridge removeProductFromFridge(@PathVariable(value = "id") Long id, @RequestBody GroceryProduct product) {
-        Fridge fridge = fetchFridge(id);
+        Fridge fridge = fridgeService.get(id);
         fridge.removeGroceryProduct(product);
         fridgeService.save(fridge);
         return fridge;
-    }
-
-    private Fridge fetchFridge(Long id) {
-        return fridgeService.get(id);
     }
 
 }
